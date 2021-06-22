@@ -21,34 +21,28 @@ class Solver{
         */
         Solver(std::istream &dimacsStream);
         /**
-         * @brief Funkcija koja primenjuje iskaznu rezoluciju na klauze c1 i c2 za 
-         * po literalu p i popunjava rezolventu r
-         * @return Vraca true ukoliko dobijena rezolventa nije tautologija, u suprotnom false
-        */
-        bool resolve(const Clause &c1, const Clause &c2, Literal p, Clause &r);
-        /**
-         * @brief Funkcija eliminise literal p iz cnf formule na koju se primenjuje
-         * tako sto primenjuje pravilo iskazne rezolucije.
-         * @return Vraca false ukoliko se rezolucijom dobije prazna klauza, 
+         * @brief Funkcija primenjuje pravilo rezolucije za neki par klauza c1 i c2 i popunjava rezolventu r
+         * @return Vraca false ukoliko je dobijena rezolventa tautologija ili vec postoji u skupu klauza,
          * u suprotnom vraca true
         */
-        bool eliminate(Literal p);
-        /**
-         * @brief Funkcija proverava da li je data formula zadovoljiva
+        bool resolve(const Clause &c1, const Clause &c2, Clause &r);
+         /**
+         * @brief Funkcija utvrdjuje zadovoljivost formule primenom metoda rezolucije
+         * @return Vraca false ukoliko je u skup dodata prazna klauza u suprotnom vraca true
         */
         bool isSatisfiable();
 
         CNFFormula getFormula();
     private:
         CNFFormula m_f;
+        /**
+         * @brief Funkcija koja primenjuje pravilo rezolucije na klauze c1 i c2
+         * po literalu p i popunjava rezolventu r
+         * @return Vraca true ukoliko dobijena rezolventa nije tautologija i ne postoji u skupu, u suprotnom false
+        */
+        bool resolve(const Clause &c1, const Clause &c2, Literal p, Clause &r);
 
 };
-/**
- * @brief operator << sluzi za ispis u C++ stream
- * @param out - stream u koji se pise
- * @param f - formula koja se pise u stream
- * @return  referenca na stream kako bi pozivi '<<' mogli da se ulancaju
- */
 std::ostream& operator<<(std::ostream &out, const CNFFormula &f);
 std::ostream& operator<<(std::ostream &out, const Clause &c);
 

@@ -14,11 +14,14 @@ int main(int argc, char **argv)
   Solver s{dimacsStream};
 
   CNFFormula formula = s.getFormula();
-  std::cout<<"Formula: "<<formula<<" is ";
+  std::cout<<"Formula: "<<formula<<std::endl;
+  std::cout<<std::endl;
   bool isSat = s.isSatisfiable();
+  std::cout<<std::endl;
+
   if (isSat)
-    std::cout << "satisfiable." << std::endl;
+    std::cout << "Formula is satisfiable." << std::endl;
   else
-    std::cout << "unsatisfiable." << std::endl;
+    std::cout << "Formula is unsatisfiable." << std::endl;
   return 0;
 }
