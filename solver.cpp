@@ -116,6 +116,7 @@ bool Solver::isSatisfiable()
                 continue;
             Clause r;
             bool isResolved = resolve(m_f[i],m_f[j], r);
+            //Ukoliko resolve vrati true (dobijena rezolventa nije tautologija i ne postoji u skupu) dodaje se rezolventa u skup klauza
             if(isResolved)
             {
                 m_f.push_back(r);
